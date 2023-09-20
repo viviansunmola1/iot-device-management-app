@@ -1,0 +1,23 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/viviansunmola1/iot-device-management-app.git"
+  },
+  "author": "Vivian Sunmola",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/viviansunmola1/iot-device-management-app/issues"
+  },
+  "homepage": "https://github.com/viviansunmola1/iot-device-management-app#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "mongoose": "^7.5.2"
+  }
+}
