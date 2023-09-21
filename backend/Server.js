@@ -16,8 +16,9 @@ app.get('/', (req, res)=> {
 })
 
 // Define API routes for industry and device page 
-app.use ('/')
-app.use ('/')
+app.use('/api/industries', require('./routes/industryRoutes'));
+app.use('/api/devices', require('./routes/deviceRoutes'));
+
 
 // Define port for server to listen on 
 const port = process.env.PORT || 3000;
