@@ -1,23 +1,16 @@
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
+import Industries from './Industries/Industries'; // Import the Industries component
+import Devices from './Devices/Devices'; // Import the Devices component
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>IoT Device Management</h1>
+      <h2>Industries</h2>
+      <Industries /> {/* Render the Industries component */}
+      <h2>IoT Devices</h2>
+      <Devices /> {/* Render the Devices component */}
     </div>
   );
 }
