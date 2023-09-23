@@ -32,8 +32,6 @@ app.get('/', (req, res)=> {
 });
 
 // Define API routes for industry and device page 
-// app.use('/api/industries', require('./routes/industryRoutes'));
-// app.use('/api/devices', require('./routes/deviceRoutes'));
 app.use('/api', routes);
 
 // Set up middleware 
