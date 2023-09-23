@@ -6,13 +6,16 @@ const Device = require('../models/Device');
 // Define the function to create a new device
 const createDevice = async (req, res) => {
   try {
-    // Extract the data for the new device from the request body
-    const { name, description } = req.body;
+    // Extract all the necessary data for the new device from the request body
+    const { name, description, uniqueIdentifier, fee, industry } = req.body;
 
-    // Create a new device instance
+    // Create a new device instance with all the fields
     const newDevice = new Device({
       name,
       description,
+      uniqueIdentifier,
+      fee,
+      industry,
     });
 
     // Save the new device to the database
@@ -27,10 +30,12 @@ const createDevice = async (req, res) => {
   }
 };
 
+
 // Define the function to get all devices
 const getAllDevices = async (req, res) => {
   try {
     // Fetch all devices from the database using Mongoose
+    console.log('get all devices work')
     const devices = await Device.find();
     
     // Return the list of devices as a JSON response
