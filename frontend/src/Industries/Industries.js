@@ -5,6 +5,11 @@ import './Industries.css'; // Import the CSS file here
 const Industries = () => {
   const [industries, setIndustries] = useState([]);
   const [newIndustry, setNewIndustry] = useState({ name: '', description: '' });
+  const [updatingIndustry, setUpdatingIndustry] = useState(null);
+  const [updatedIndustryData, setUpdatedIndustryData] = useState({
+    name: '',
+    description: '',
+  });
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -12,12 +17,9 @@ const Industries = () => {
   };
 
   const handleCreateIndustry = () => {
-    // Make a POST request to create a new industry
     axios.post('http://localhost:5000/api/industries', newIndustry)
       .then((response) => {
-        // Add the created industry to the industries array
         setIndustries([...industries, response.data]);
-        // Clear the form fields
         setNewIndustry({ name: '', description: '' });
       })
       .catch((error) => {
@@ -26,17 +28,45 @@ const Industries = () => {
   };
 
   const handleUpdateIndustry = (industry) => {
-    // Implement the logic to update an industry
-    // You can show a form to update the industry properties and make a PUT request
+    setUpdatingIndustry(industry);
+    setUpdatedIndustryData({
+      name: industry.name,
+      description: industry.description,
+    });
+  };
+
+  const handleSaveUpdate = () => {
+    axios.put(`http://localhost:5000/api/industries/${updatingIndustry._id}`, updatedIndustryData)
+      .then((response) => {
+        const updatedIndustries = industries.map((industry) =>
+          industry._id === response.data._id ? response.data : industry
+        );
+        setIndustries(updatedIndustries);
+        setUpdatingIndustry(null);
+        setUpdatedIndustryData({ name: '', description: '' });
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
+  const handleCancelUpdate = () => {
+    setUpdatingIndustry(null);
+    setUpdatedIndustryData({ name: '', description: '' });
   };
 
   const handleDeleteIndustry = (industryId) => {
-    // Implement the logic to delete an industry
-    // Make a DELETE request to your backend API
+    axios.delete(`http://localhost:5000/api/industries/${industryId}`)
+      .then(() => {
+        const updatedIndustries = industries.filter((industry) => industry._id !== industryId);
+        setIndustries(updatedIndustries);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   useEffect(() => {
-    // Fetch industries from your backend API
     axios.get('http://localhost:5000/api/industries')
       .then((response) => {
         setIndustries(response.data);
@@ -75,6 +105,30 @@ const Industries = () => {
               <p>{industry.description}</p>
               <button onClick={() => handleUpdateIndustry(industry)}>Update</button>
               <button onClick={() => handleDeleteIndustry(industry._id)}>Delete</button>
+              {updatingIndustry && updatingIndustry._id === industry._id && (
+                <div>
+                  <input
+                    type="text"
+                    name="updatedName"
+                    placeholder="Industry Name"
+                    value={updatedIndustryData.name}
+                    onChange={(e) =>
+                      setUpdatedIndustryData({ ...updatedIndustryData, name: e.target.value })
+                    }
+                  />
+                  <input
+                    type="text"
+                    name="updatedDescription"
+                    placeholder="Industry Description"
+                    value={updatedIndustryData.description}
+                    onChange={(e) =>
+                      setUpdatedIndustryData({ ...updatedIndustryData, description: e.target.value })
+                    }
+                  />
+                  <button onClick={handleSaveUpdate}>Save Update</button>
+                  <button onClick={handleCancelUpdate}>Cancel</button>
+                </div>
+              )}
             </div>
           </li>
         ))}

@@ -6,9 +6,9 @@ const Devices = () => {
   const [newDevice, setNewDevice] = useState({
     name: '',
     description: '',
-    industry: '', // Initialize industry as an empty string
-    uniqueIdentifier: '', // Initialize uniqueIdentifier as an empty string
-    fee: 0, // Initialize fee as 0
+    industry: '', // Initialize industryId as an empty string
+    fee: '', // Initialize fee as an empty string
+    warehouse: '', // Initialize warehouse as an empty string
   });
   const [industryData, setIndustryData] = useState([]);
   const [updatingDevice, setUpdatingDevice] = useState(null);
@@ -42,8 +42,9 @@ const Devices = () => {
         setNewDevice({
           name: '',
           description: '',
-          industry: '', // Reset industry after creating a device
-          fee: 0, // Reset fee to 0
+          industryId: '', // Reset industryId after creating a device
+          fee: '', // Reset fee after creating a device
+          warehouse: '', // Reset warehouse after creating a device
         });
       })
       .catch((error) => {
@@ -123,15 +124,22 @@ const Devices = () => {
           onChange={handleInputChange}
         />
         <input
-          type="number"
+          type="text"
           name="fee"
-          placeholder="Fee"
+          placeholder="Fee" // Add the input field for fee
           value={newDevice.fee}
           onChange={handleInputChange}
         />
+        <input
+          type="text"
+          name="warehouse"
+          placeholder="Warehouse" // Add the input field for warehouse
+          value={newDevice.warehouse}
+          onChange={handleInputChange}
+        />
         <select
-          name="industry"
-          value={newDevice.industry}
+          name="industryId"
+          value={newDevice.industryId}
           onChange={handleInputChange}
         >
           <option value="">Select Industry</option>
@@ -148,7 +156,7 @@ const Devices = () => {
           <li key={device._id}>
             <h3>{device.name}</h3>
             <p>{device.description}</p>
-            <p>{device.industry}</p>
+            {device.industry && <p>Industry: {device.industry.name}</p>}
             <button onClick={() => handleUpdateDevice(device)}>Update</button>
             <button onClick={() => handleDeleteDevice(device._id)}>Delete</button>
             {updatingDevice && updatingDevice._id === device._id && (
