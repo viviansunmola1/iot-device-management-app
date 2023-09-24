@@ -7,13 +7,12 @@ const Device = require('../models/Device');
 const createDevice = async (req, res) => {
   try {
     // Extract all the necessary data for the new device from the request body
-    const { name, description, uniqueIdentifier, fee, industry } = req.body;
+    const { name, description, fee, industry } = req.body;
 
-    // Create a new device instance with all the fields
+    // Create a new device instance with the remaining fields
     const newDevice = new Device({
       name,
       description,
-      uniqueIdentifier,
       fee,
       industry,
     });
@@ -29,6 +28,7 @@ const createDevice = async (req, res) => {
     res.status(500).json({ error: 'An error occurred while creating the device' });
   }
 };
+
 
 
 // Define the function to get all devices
