@@ -1,3 +1,4 @@
+// server.js
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
@@ -22,6 +23,12 @@ db.on('error', (error) => {
 db.once('open', () => {
   console.log('Connected to MongoDB');
 });
+
+// Register the Industry model
+require('./models/Industry');
+require('./models/Device');
+
+
 
 const app = express();
 const routes = require('./routes/routes');
