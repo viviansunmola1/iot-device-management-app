@@ -1,14 +1,37 @@
 import React from 'react';
 import './App.css';
-import Industries from './Industries/Industries'; // Import the Industries component
-import Devices from './Devices/Devices'; // Import the Devices component
+import { BrowserRouter as Router, Route, Link, Routes } from 'react-router-dom';
+import Industries from './Industries/Industries';
+import Devices from './Devices/Devices';
 
 function App() {
   return (
-    <div className="App">
-      <Industries /> {/* Render the Industries component */}
-      <Devices /> {/* Render the Devices component */}
-    </div>
+    <Router>
+      <div className="App">
+        <header>
+          <h1>IoT Device Management</h1>
+          <nav>
+            <ul>
+              <li>
+                <Link to="/industries">Industries</Link>
+              </li>
+              <li>
+                <Link to="/devices">Devices</Link>
+              </li>
+            </ul>
+          </nav>
+        </header>
+        <div className="container">
+          <Routes>
+            <Route path="/industries" element={<Industries />} />
+            <Route path="/devices" element={<Devices />} />
+          </Routes>
+        </div>
+
+        {/* Add space between sections */}
+        <div className="section-space"></div>
+      </div>
+    </Router>
   );
 }
 

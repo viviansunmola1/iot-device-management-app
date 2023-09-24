@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import './Industries.css'; // Import the CSS file here
 
 const Industries = () => {
   const [industries, setIndustries] = useState([]);
@@ -48,7 +49,7 @@ const Industries = () => {
   return (
     <div>
       <h2>Industries</h2>
-      <div>
+      <div className="heading-space">
         <h3>Create a New Industry</h3>
         <input
           type="text"

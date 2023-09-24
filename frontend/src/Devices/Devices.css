@@ -1,0 +1,8 @@
+/* Add space between the "Create a New Device" heading and the list of devices */
+h2 {
+    margin-bottom:10px ; /* Adjust the margin to control the spacing */
+  }
+
+.heading-space {
+    margin-bottom: 10px;
+}
