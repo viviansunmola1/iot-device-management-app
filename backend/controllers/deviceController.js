@@ -41,7 +41,7 @@ const getAllDevices = async (req, res) => {
     // Return the list of devices as a JSON response
     res.json(devices);
   } catch (error) {
-    // Handle errors and send an error response if necessary
+    // Handle errors and send an error response 
     console.error(error);
     res.status(500).json({ error: 'An error occurred while fetching devices' });
   }
