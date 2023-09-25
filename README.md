@@ -113,13 +113,13 @@ Navigate to the project directory that contains the Dockerfile(s).
 2. Build the Docker image for the frontend (replace frontend-image with a suitable image name):
 
 ```
-docker build -t frontend-image -f frontend/Dockerfile .
+docker build -t iot-device-management-app -f frontend/Dockerfile .
 ```
 
 3. Build the Docker image for the backend (replace backend-image with a suitable image name):
 
  ```
-docker build -t backend-image -f backend/Dockerfile .
+docker build -t iot-device-management-app -f backend/Dockerfile .
  ```
 4. Once the images are built, you can run the Docker containers for both frontend and backend using Docker Compose:
 
