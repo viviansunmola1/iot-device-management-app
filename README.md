@@ -31,7 +31,7 @@ To install the required dependencies, follow these steps:
 1. Clone the repository to your local machine:
 
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/viviansunmola1/iot-device-management-app.git
    ```
 
 2. Navigate to project Directory    
@@ -53,6 +53,15 @@ To run the frontend of the application locally, navigate to the `frontend` direc
 ```
 npm start
 ```
+
+#### Running the Backend
+
+To run the frontend of the application locally, navigate to the `backend` directory and use the following command:
+
+```
+npm start
+```
+
 #### Accessing Application 
 http://localhost:3000
 
