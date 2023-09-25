@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 const createDevice = async (req, res) => {
   try {
     // Extract the data for the new device from the request body
-    const { name, description, industry, fee, warehouse } = req.body;
+    const { name, industry, fee, warehouse } = req.body;
 
     // Validate the ObjectId for the "industry" field
     if (!mongoose.Types.ObjectId.isValid(industry)) {
@@ -18,9 +18,8 @@ const createDevice = async (req, res) => {
 
     // Create a new device instance
     const newDevice = new Device({
-      uniqueIdentifier, // Set the unique identifier
+      uniqueIdentifier,
       name,
-      description,
       industry,
       fee,
       warehouse,
@@ -38,12 +37,10 @@ const createDevice = async (req, res) => {
   }
 };
 
-
-// Define the function to get all devices
 const getAllDevices = async (req, res) => {
   try {
-    const devices = await Device.find().populate('industry', 'name');
-    
+    const devices = await Device.find().populate('industry', 'name'); // Populate 'industry' with 'name' property
+
     // Return the list of devices as a JSON response
     res.json(devices);
   } catch (error) {
@@ -53,15 +50,16 @@ const getAllDevices = async (req, res) => {
   }
 };
 
+
 const updateDevice = async (req, res) => {
   try {
     const { id } = req.params;
-    const { name, description } = req.body;
+    const { name } = req.body; // Remove description
 
     // Find the device by ID and update its properties
     const updatedDevice = await Device.findByIdAndUpdate(
       id,
-      { name, description },
+      { name }, // Remove description
       { new: true }
     );
 
