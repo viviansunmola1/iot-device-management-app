@@ -4,6 +4,10 @@
 
 The IoT Device Management App is a web application designed to help users manage IoT devices and industries. It provides a user-friendly interface for viewing, creating, updating, and deleting IoT devices and industries. This README will guide you through setting up and using the application.
 
+![Device Page](./Device%20Page.png)
+![Industry Page](./Industry%20Page.png)
+
+
 ## Getting Started
 
 ### Prerequisites
