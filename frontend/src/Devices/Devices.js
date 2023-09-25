@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import './Devices.css'; // Import the CSS file here
+
 
 const Devices = () => {
   const [devices, setDevices] = useState([]);
@@ -162,31 +164,70 @@ const Devices = () => {
         </select>
         <button onClick={handleCreateDevice}>Create</button>
       </div>
-      <ul>
-        {devices.map((device) => (
-          <li key={device._id}>
-            <h3>{device.name}</h3>
-            {device.industry && <p>Industry: {device.industry.name}</p>}
-            <button onClick={() => handleUpdateDevice(device)}>Update</button>
-            <button onClick={() => handleDeleteDevice(device._id)}>Delete</button>
-            {updatingDevice && updatingDevice._id === device._id && (
-              <div>
-                <input
-                  type="text"
-                  name="updatedName"
-                  placeholder="Device Name"
-                  value={updatedDeviceData.name}
-                  onChange={(e) =>
-                    setUpdatedDeviceData({ ...updatedDeviceData, name: e.target.value })
-                  }
-                />
-                <button onClick={handleSaveUpdate}>Save Update</button>
-                <button onClick={handleCancelUpdate}>Cancel</button>
-              </div>
-            )}
-          </li>
-        ))}
-      </ul>
+ 
+
+<ul>
+  {devices.map((device) => (
+    <li key={device._id}>
+      <h3>{device.name}</h3>
+      {device.industry && <p>Industry: {device.industry.name}</p>}
+      <button onClick={() => handleUpdateDevice(device)}>Update</button>
+      <button onClick={() => handleDeleteDevice(device._id)}>Delete</button>
+      {updatingDevice && updatingDevice._id === device._id && (
+        <div>
+          <input
+            type="text"
+            name="updatedName"
+            placeholder="Device Name"
+            value={updatedDeviceData.name}
+            onChange={(e) =>
+              setUpdatedDeviceData({ ...updatedDeviceData, name: e.target.value })
+            }
+          />
+          
+          <input
+            type="text"
+            name="updatedFee"
+            placeholder="Fee"
+            value={updatedDeviceData.fee}
+            onChange={(e) =>
+              setUpdatedDeviceData({ ...updatedDeviceData, fee: e.target.value })
+            }
+          />
+          <input
+            type="text"
+            name="updatedWarehouse"
+            placeholder="Warehouse"
+            value={updatedDeviceData.warehouse}
+            onChange={(e) =>
+              setUpdatedDeviceData({ ...updatedDeviceData, warehouse: e.target.value })
+            }
+          />
+          
+          <select
+            name="updatedIndustry"
+            value={updatedDeviceData.industry}
+            onChange={(e) =>
+              setUpdatedDeviceData({ ...updatedDeviceData, industry: e.target.value })
+            }
+          >
+            <option value="">Select Industry</option>
+            {industryData.map((industry) => (
+              <option key={industry._id} value={industry._id}>
+                {industry.name}
+              </option>
+            ))}
+          </select>
+          <button onClick={handleSaveUpdate}>Save Update</button>
+          <button onClick={handleCancelUpdate}>Cancel</button>
+        </div>
+      )}
+    </li>
+  ))}
+</ul>
+
+
+
     </div>
   );
 };
