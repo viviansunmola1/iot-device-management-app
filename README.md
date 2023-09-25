@@ -110,14 +110,13 @@ Before proceeding, make sure you have Docker installed on your machine. You can 
     ```
 Navigate to the project directory that contains the Dockerfile(s).
 
-2. Build the Docker image for the frontend (replace frontend-image with a suitable image name):
+2. Build the Docker image for the frontend
 
 ```
 docker build -t iot-device-management-app -f frontend/Dockerfile .
 ```
 
-3. Build the Docker image for the backend (replace backend-image with a suitable image name):
-
+3. Build the Docker image for the backend 
  ```
 docker build -t iot-device-management-app -f backend/Dockerfile .
  ```
