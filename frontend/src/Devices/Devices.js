@@ -35,39 +35,44 @@ const Devices = () => {
   };
 
   const handleCreateDevice = () => {
-    // Check required fields
-    if (!newDevice.name || !newDevice.industry || !newDevice.fee || !newDevice.warehouse) {
-      console.error('All fields are required.');
-      return;
-    }
+  // Check required fields
+  if (!newDevice.name || !newDevice.industry || !newDevice.fee || !newDevice.warehouse) {
+    console.error('All fields are required.');
+    return;
+  }
 
-    // Ensure fee is a valid number
-    const feeAsNumber = parseFloat(newDevice.fee);
-    if (isNaN(feeAsNumber) || feeAsNumber < 0) {
-      console.error('Fee must be a valid number greater than or equal to 0.');
-      return;
-    }
+  // Ensure fee is a valid number
+  const feeAsNumber = parseFloat(newDevice.fee);
+  if (isNaN(feeAsNumber) || feeAsNumber < 0) {
+    console.error('Fee must be a valid number greater than or equal to 0.');
+    return;
+  }
 
-    // Continue with the Axios request
-    axios
-      .post('http://localhost:5000/api/devices', newDevice, {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      })
-      .then((response) => {
-        setDevices([...devices, response.data]);
-        setNewDevice({
-          name: '',
-          industry: '',
-          fee: '',
-          warehouse: '',
-        });
-      })
-      .catch((error) => {
-        console.error('Error creating device:', error);
+  // Find the selected industry object based on the industry _id
+  const selectedIndustry = industryData.find((industry) => industry._id === newDevice.industry);
+
+  // Continue with the Axios request
+  axios
+    .post('http://localhost:5000/api/devices', newDevice, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+    .then((response) => {
+      // Include the industry object in the new device
+      response.data.industry = selectedIndustry;
+      setDevices([...devices, response.data]);
+      setNewDevice({
+        name: '',
+        industry: '', // Reset the industry to an empty string
+        fee: '',
+        warehouse: '',
       });
-  };
+    })
+    .catch((error) => {
+      console.error('Error creating device:', error);
+    });
+};
 
   const handleUpdateDevice = (device) => {
     setUpdatingDevice(device);
