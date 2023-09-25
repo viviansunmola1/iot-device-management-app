@@ -42,6 +42,13 @@ h1 {
   margin-right: 20px; /* Add margin to the right to create space */
 }
 
+h2 {
+  font-size: 24px;
+  font-weight: bold;
+  color: white; /* Red color text color for the title */
+}
+
+
 /* Style the navigation menu */
 nav ul {
   list-style-type: none;

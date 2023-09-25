@@ -10,6 +10,7 @@ function App() {
       <div className="App">
         <header>
           <h1>IoT Device Management</h1>
+          <h2> Welcome! Manage your Devices here</h2>
           <nav>
             <ul>
               <li>
