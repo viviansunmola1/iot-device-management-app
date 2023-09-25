@@ -33,3 +33,31 @@ To install the required dependencies, follow these steps:
    ```bash
    git clone <repository-url>
    ```
+
+2. Navigate to project Directory    
+```
+   cd iot-device-management-app
+```
+3. Install node packages 
+```
+npm install
+```
+### Usage
+#### Running application 
+To run the application locally, use the following command in both :
+```
+npm start
+```
+#### Accessing Application 
+http://localhost:3000
+
+## Features
+
+- View a list of IoT industries.
+- Create new IoT industries.
+- Update existing IoT industries.
+- Delete IoT industries.
+- View a list of IoT devices.
+- Create new IoT devices.
+- Update existing IoT devices.
+- Delete IoT devices.
