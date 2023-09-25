@@ -90,3 +90,46 @@ http://localhost:3000
 - Create new IoT devices.
 - Update existing IoT devices.
 - Delete IoT devices.
+
+
+### Docker Setup
+
+This project can be containerized using Docker for easy deployment and distribution. Follow the steps below to set up the project with Docker:
+
+#### Prerequisites
+
+Before proceeding, make sure you have Docker installed on your machine. You can download and install Docker from the official website: [Docker](https://www.docker.com/get-started).
+
+#### Building and Running the Docker Containers
+
+1. Clone the repository to your local machine:
+
+   ```
+   git clone https://github.com/viviansunmola1/iot-device-management-app.git
+   cd iot-device-management-app
+    ```
+Navigate to the project directory that contains the Dockerfile(s).
+
+2. Build the Docker image for the frontend (replace frontend-image with a suitable image name):
+
+```
+docker build -t frontend-image -f frontend/Dockerfile .
+```
+
+3. Build the Docker image for the backend (replace backend-image with a suitable image name):
+
+ ```
+docker build -t backend-image -f backend/Dockerfile .
+ ```
+4. Once the images are built, you can run the Docker containers for both frontend and backend using Docker Compose:
+
+ ```
+docker-compose up
+ ```
+This command will start the containers, and you can access the application by opening your web browser and navigating to http://localhost:3000 for the frontend and http://localhost:5000 for the backend API.
+
+#### Stopping the Containers
+To stop the running Docker containers, you can press Ctrl + C in the terminal where they are running, or you can run the following command in a separate terminal window:
+ ```
+docker-compose down
+ ```
