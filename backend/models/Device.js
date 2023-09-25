@@ -1,20 +1,21 @@
 const mongoose = require('mongoose');
 
 const deviceSchema = new mongoose.Schema({
-  name: String,
-  description: String,
-  industry: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Industry',
+  uniqueIdentifier: {
+    type: String,
     required: true,
+    unique: true, // Ensure uniqueness
+    default: function () {
+      
+      return Date.now().toString();
+    },
   },
-  fee: Number,
-  warehouse: String,
-  additionalTime: String,
+  name: { type: String, required: true },
+  industry: { type: mongoose.Schema.Types.ObjectId, ref: 'Industry', required: true },
+  fee: { type: Number, required: true },
+  warehouse: { type: String, required: true },
 });
 
-
 const Device = mongoose.model('Device', deviceSchema);
-
 
 module.exports = Device;
