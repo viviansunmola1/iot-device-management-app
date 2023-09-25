@@ -7,8 +7,31 @@ services:
       - "3000:3000"  # Map container port 3000 to host port 3000
     depends_on:
       - backend
+    networks:
+      - network  # Attach the frontend service to the custom network
 
   backend:
-    image: node:14  # You can use an official Node.js image
-    working_dir: /app
-    command: npm start
+    build:
+      context: ./backend  
+    ports:
+      - "5000:5000"  # Map container port 5000 to host port 5000
+    environment:
+      - MONGO_URI=mongodb+srv://iotdevicemanagement:iotdevicemanagement@cluster0.r2jgnx6.mongodb.net/iotdevicemanagement?retryWrites=true&w=majority
+      # Set your MongoDB connection here
+    depends_on:
+      - mongo
+    networks:
+      - network  # Attach the backend service to the custom network
+
+  mongo:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./data:/data/db
+    networks:
+      - network  # Attach the MongoDB service to the custom network
+
+networks:
+  network:
+    driver: bridge

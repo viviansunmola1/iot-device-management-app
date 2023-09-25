@@ -122,7 +122,7 @@ docker build -t iot-device-management-app -f frontend/Dockerfile .
 
 3. Build the Docker image for the backend 
  ```
-docker build -t iot-device-management-app -f backend/Dockerfile .
+docker build -t iot-device-management-app:backend -f backend/Dockerfile .
  ```
 4. Once the images are built, you can run the Docker containers for both frontend and backend using Docker Compose:
 

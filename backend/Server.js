@@ -1,3 +1,4 @@
+const port = process.env.PORT || 5000;
 // server.js
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -49,7 +50,6 @@ app.get('/', (req, res) => {
 // Define API routes for industry and device page
 app.use('/api', routes);
 
-const port = process.env.PORT || 5000;
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
