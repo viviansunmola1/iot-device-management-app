@@ -42,6 +42,34 @@ To install the required dependencies, follow these steps:
 ```
 npm install
 ```
+
+4. Before running the backend of this application, make sure you have the following dependencies installed:
+
+- [cors](https://www.npmjs.com/package/cors) - CORS middleware for Express.js.
+- [dotenv](https://www.npmjs.com/package/dotenv) - Loads environment variables from a .env file.
+- [express](https://www.npmjs.com/package/express) - Web framework for Node.js.
+- [mongoose](https://www.npmjs.com/package/mongoose) - MongoDB object modeling tool.
+
+You can install these dependencies using npm:
+
+```
+npm install cors dotenv express mongoose
+```
+
+### Frontend Dependencies
+
+Before running the frontend of this application, make sure you have the following dependencies installed:
+
+- [React](https://reactjs.org/) - JavaScript library for building user interfaces.
+- [ReactDOM](https://reactjs.org/docs/react-dom.html) - React package for working with the DOM.
+- [Axios](https://www.npmjs.com/package/axios) - Promise-based HTTP client for making requests to your backend API.
+
+You can install these dependencies using npm:
+
+```
+npm install react react-dom axios
+```
+
 ### Usage
 #### Running application 
 ### Usage
