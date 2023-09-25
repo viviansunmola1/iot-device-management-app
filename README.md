@@ -44,7 +44,12 @@ npm install
 ```
 ### Usage
 #### Running application 
-To run the application locally, use the following command in both :
+### Usage
+
+#### Running the Frontend
+
+To run the frontend of the application locally, navigate to the `frontend` directory and use the following command:
+
 ```
 npm start
 ```
