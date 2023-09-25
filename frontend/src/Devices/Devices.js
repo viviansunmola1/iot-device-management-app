@@ -5,16 +5,14 @@ const Devices = () => {
   const [devices, setDevices] = useState([]);
   const [newDevice, setNewDevice] = useState({
     name: '',
-    description: '',
-    industry: '', // Initialize industryId as an empty string
-    fee: '', // Initialize fee as an empty string
-    warehouse: '', // Initialize warehouse as an empty string
+    industry: '',
+    fee: '',
+    warehouse: '',
   });
   const [industryData, setIndustryData] = useState([]);
   const [updatingDevice, setUpdatingDevice] = useState(null);
   const [updatedDeviceData, setUpdatedDeviceData] = useState({
     name: '',
-    description: '',
   });
 
   // Fetch industry data when the component mounts
@@ -35,20 +33,37 @@ const Devices = () => {
   };
 
   const handleCreateDevice = () => {
+    // Check required fields
+    if (!newDevice.name || !newDevice.industry || !newDevice.fee || !newDevice.warehouse) {
+      console.error('All fields are required.');
+      return;
+    }
+
+    // Ensure fee is a valid number
+    const feeAsNumber = parseFloat(newDevice.fee);
+    if (isNaN(feeAsNumber) || feeAsNumber < 0) {
+      console.error('Fee must be a valid number greater than or equal to 0.');
+      return;
+    }
+
+    // Continue with the Axios request
     axios
-      .post('http://localhost:5000/api/devices', newDevice)
+      .post('http://localhost:5000/api/devices', newDevice, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
       .then((response) => {
         setDevices([...devices, response.data]);
         setNewDevice({
           name: '',
-          description: '',
-          industryId: '', // Reset industryId after creating a device
-          fee: '', // Reset fee after creating a device
-          warehouse: '', // Reset warehouse after creating a device
+          industry: '',
+          fee: '',
+          warehouse: '',
         });
       })
       .catch((error) => {
-        console.error(error);
+        console.error('Error creating device:', error);
       });
   };
 
@@ -56,7 +71,6 @@ const Devices = () => {
     setUpdatingDevice(device);
     setUpdatedDeviceData({
       name: device.name,
-      description: device.description,
     });
   };
 
@@ -69,7 +83,7 @@ const Devices = () => {
         );
         setDevices(updatedDevices);
         setUpdatingDevice(null);
-        setUpdatedDeviceData({ name: '', description: '' });
+        setUpdatedDeviceData({ name: '' });
       })
       .catch((error) => {
         console.error(error);
@@ -78,7 +92,7 @@ const Devices = () => {
 
   const handleCancelUpdate = () => {
     setUpdatingDevice(null);
-    setUpdatedDeviceData({ name: '', description: '' });
+    setUpdatedDeviceData({ name: '' });
   };
 
   const handleDeleteDevice = (deviceId) => {
@@ -115,32 +129,29 @@ const Devices = () => {
           placeholder="Device Name"
           value={newDevice.name}
           onChange={handleInputChange}
-        />
-        <input
-          type="text"
-          name="description"
-          placeholder="Device Description"
-          value={newDevice.description}
-          onChange={handleInputChange}
+          autoComplete='off'
         />
         <input
           type="text"
           name="fee"
-          placeholder="Fee" // Add the input field for fee
+          placeholder="Fee"
           value={newDevice.fee}
           onChange={handleInputChange}
+          autoComplete='off'
         />
         <input
           type="text"
           name="warehouse"
-          placeholder="Warehouse" // Add the input field for warehouse
+          placeholder="Warehouse"
           value={newDevice.warehouse}
           onChange={handleInputChange}
+          autoComplete='off'
         />
         <select
-          name="industryId"
-          value={newDevice.industryId}
+          name="industry"
+          value={newDevice.industry}
           onChange={handleInputChange}
+          autoComplete='off'
         >
           <option value="">Select Industry</option>
           {industryData.map((industry) => (
@@ -155,7 +166,6 @@ const Devices = () => {
         {devices.map((device) => (
           <li key={device._id}>
             <h3>{device.name}</h3>
-            <p>{device.description}</p>
             {device.industry && <p>Industry: {device.industry.name}</p>}
             <button onClick={() => handleUpdateDevice(device)}>Update</button>
             <button onClick={() => handleDeleteDevice(device._id)}>Delete</button>
@@ -168,15 +178,6 @@ const Devices = () => {
                   value={updatedDeviceData.name}
                   onChange={(e) =>
                     setUpdatedDeviceData({ ...updatedDeviceData, name: e.target.value })
-                  }
-                />
-                <input
-                  type="text"
-                  name="updatedDescription"
-                  placeholder="Device Description"
-                  value={updatedDeviceData.description}
-                  onChange={(e) =>
-                    setUpdatedDeviceData({ ...updatedDeviceData, description: e.target.value })
                   }
                 />
                 <button onClick={handleSaveUpdate}>Save Update</button>
